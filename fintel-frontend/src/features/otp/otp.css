@@ -1,0 +1,98 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.otp-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #6c63ff, #5a54e6);
+}
+
+/* CARD */
+.otp-card {
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  width: 350px;
+  text-align: center;
+  animation: fadeIn 0.6s ease;
+}
+
+.otp-card h2 {
+  margin-bottom: 10px;
+}
+
+.otp-card p {
+  margin-bottom: 20px;
+  color: #777;
+}
+
+/* PHONE INPUT */
+.phone-input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+}
+
+/* OTP INPUTS */
+.otp-inputs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.otp-inputs input {
+  width: 45px;
+  height: 50px;
+  text-align: center;
+  font-size: 18px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.otp-inputs input:focus {
+  border-color: #6c63ff;
+}
+
+/* BUTTON */
+.btn {
+  width: 100%;
+  padding: 12px;
+  background: #6c63ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* RESEND */
+.resend {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.resend button {
+  border: none;
+  background: none;
+  color: #6c63ff;
+  cursor: pointer;
+}
+
+/* ANIMATION */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

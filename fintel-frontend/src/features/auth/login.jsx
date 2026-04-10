@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import { useGoogleLogin, GoogleLogin} from "@react-oauth/google"; // ✅ added
 import "./login.css";
 import { loginUser, googleLogin } from "../../api/authApi";
+
 
 export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -155,6 +156,14 @@ export default function Login() {
           className="login-form-side"
         >
           <div className="login-form-inner">
+            <motion.button
+              type="button"
+              className="otp-login-btn"
+              onClick={() => navigate("/otp")}
+            >
+              OTP Login
+            </motion.button>
+
             <header>
               <h2>Welcome back</h2>
               <p>Sign in to your Fintle account</p>
@@ -194,9 +203,17 @@ export default function Login() {
               </div>
 
               <div className="form-utils">
-                <a href="#" className="forgot-link">
+                <Link to="/forgot-password" className="forgot-link">
                   Forgot password?
-                </a>
+                </Link>
+
+                <Link to="/otp" className="forgot-link register-link">
+                  OTP Login <span className="arrow">→</span>
+                </Link>
+
+                <Link to="/register" className="forgot-link register-link">
+                  Register your account <span className="arrow">→</span>
+                </Link>
               </div>
 
               {/* LOGIN BUTTON */}
@@ -227,31 +244,31 @@ export default function Login() {
               </button> */}
 
               <GoogleLogin
-  onSuccess={async (credentialResponse) => {
-    try {
-      const idToken = credentialResponse.credential;
+                onSuccess={async (credentialResponse) => {
+                  try {
+                    const idToken = credentialResponse.credential;
 
-      const res = await googleLogin({ idToken });
+                    const res = await googleLogin({ idToken });
 
-      if (res.data.success) {
-        const { accessToken, user } = res.data.data;
+                    if (res.data.success) {
+                      const { accessToken, user } = res.data.data;
 
-        localStorage.setItem("accessToken", accessToken);
-        localStorage.setItem("user", JSON.stringify(user));
+                      localStorage.setItem("accessToken", accessToken);
+                      localStorage.setItem("user", JSON.stringify(user));
 
-        showToast("Google Login successful 🎉", "success");
+                      showToast("Google Login successful 🎉", "success");
 
-        setTimeout(() => navigate("/dashboard"), 1500);
-      }
-    } catch (err) {
-      console.error(err);
-      showToast("Google login failed", "error");
-    }
-  }}
-  onError={() => {
-    showToast("Google Login Failed", "error");
-  }}
-/>
+                      setTimeout(() => navigate("/dashboard"), 1500);
+                    }
+                  } catch (err) {
+                    console.error(err);
+                    showToast("Google login failed", "error");
+                  }
+                }}
+                onError={() => {
+                  showToast("Google Login Failed", "error");
+                }}
+              />
             </form>
           </div>
         </motion.div>

@@ -1,0 +1,189 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* MAIN */
+.rp {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.rp-container {
+  display: flex;
+  height: 100%;
+}
+
+/* LEFT SIDE */
+.rp-left {
+  flex: 1;
+  background: linear-gradient(135deg, #6c63ff, #5a54e6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  /* ANIMATION */
+  animation: slideLeft 1s ease;
+}
+
+.rp-left img {
+  max-width: 80%;
+  max-height: 80%;
+  object-fit: contain;
+}
+
+/* RIGHT SIDE */
+.rp-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* ANIMATION */
+  animation: slideRight 1s ease;
+}
+
+/* FORM */
+.rp-form {
+  width: 320px;
+
+  /* ANIMATION */
+  animation: fadeIn 1.2s ease;
+}
+
+.rp-form h2 {
+  margin-bottom: 10px;
+}
+
+.rp-form p {
+  color: #777;
+  margin-bottom: 20px;
+}
+
+/* INPUT */
+.rp-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: all 0.3s ease;
+}
+
+.rp-form input:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 5px rgba(108, 99, 255, 0.4);
+  transform: scale(1.02);
+}
+
+/* ERROR */
+.rp-form span {
+  color: red;
+  font-size: 12px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* BUTTON */
+.rp-form button {
+  width: 100%;
+  padding: 10px;
+  background: #6c63ff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.rp-form button:hover {
+  background: #5a54e6;
+  transform: translateY(-2px);
+}
+
+.rp-form button:active {
+  transform: scale(0.97);
+}
+
+.rp-form button:disabled {
+  background: #aaa;
+}
+
+/* LINKS */
+.rp-links {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.rp-links a {
+  font-size: 14px;
+  color: #6c63ff;
+  text-decoration: none;
+  position: relative;
+}
+
+/* LINK HOVER ANIMATION */
+.rp-links a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  left: 0;
+  bottom: -2px;
+  background: #6c63ff;
+  transition: width 0.3s;
+}
+
+.rp-links a:hover::after {
+  width: 100%;
+}
+
+/* KEYFRAMES */
+@keyframes slideLeft {
+  from {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideRight {
+  from {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .rp-container {
+    flex-direction: column;
+  }
+
+  .rp-left {
+    height: 200px;
+  }
+}

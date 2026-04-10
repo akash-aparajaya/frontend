@@ -137,6 +137,19 @@ input:focus {
   cursor: pointer;
 }
 
+.otp-login-btn {
+  width: 30%;
+  padding: 16px;
+  background: black !important;
+  color: white !important;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 30px;
+  margin-left: 300px;
+}
+
 .google-btn {
   width: 100%;
   padding: 14px;
