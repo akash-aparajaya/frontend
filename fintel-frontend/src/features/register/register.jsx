@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Register.css";
+import { registerUser } from "../../api/authApi";
+import { useNavigate } from "react-router-dom";
+
 
 export default function Register() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     name: "",
+    password: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -12,7 +17,7 @@ export default function Register() {
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-
+  const phoneRegex = /^[6-9]\d{9}$/;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const passwordRegex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,16}$/;
@@ -26,6 +31,10 @@ export default function Register() {
 
     if (name === "name" && !value.trim()) {
       error = "Name is required";
+    }
+
+    if (name === "phone_number" && !phoneRegex.test(value)) {
+      error = "Invalid phone number";
     }
 
     if (name === "email" && !emailRegex.test(value)) {
@@ -46,21 +55,43 @@ export default function Register() {
 
   const isValid =
     form.name &&
+    form.phone_number &&
     form.email &&
     form.password &&
     form.confirmPassword &&
     Object.values(errors).every((e) => e === "");
 
-  const handleSubmit = (e) => {
+
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!isValid) return;
 
-    setLoading(true);
+    try {
+      const payload = {
+        tenant_name: form.name,
+        name: form.name,
+        phone_number: form.phone_number,
+        email: form.email,
+        password: form.password,
+        plan: "free"
+      };
 
-    setTimeout(() => {
-      alert("Registered Successfully 🚀");
-      setLoading(false);
-    }, 1500);
+      const res = await registerUser(payload);
+
+      if (res?.data?.success) {
+        alert("Registered Successfully 🚀");
+        navigate("/login");
+        return;
+      }
+
+      alert(res?.data?.message || "Registration failed");
+
+    } catch (err) {
+      console.error(err);
+      alert(err.response?.data?.message || "Registration failed");
+    }
   };
 
   return (
@@ -84,6 +115,9 @@ export default function Register() {
             <form onSubmit={handleSubmit}>
               <input name="name" placeholder="Full Name" onChange={handleChange} />
               {errors.name && <span>{errors.name}</span>}
+
+              <input type="text" name="phone_number" placeholder="Phone Number" onChange={handleChange} />
+              {errors.phone_number && <span>{errors.phone_number}</span>}
 
               <input name="email" placeholder="Email Address" onChange={handleChange} />
               {errors.email && <span>{errors.email}</span>}

@@ -5,7 +5,7 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard-container">
-      
+
       {/* HEADER */}
       <div className="dashboard-header">
         <h2>Dashboard</h2>
@@ -25,7 +25,7 @@ export default function Dashboard() {
 
         {user && (
           <div className="user-card">
-            <p><strong>Name:</strong> {user.fullName}</p>
+            <p><strong>Name:</strong> {user.name}</p>
             <p><strong>Email:</strong> {user.email}</p>
           </div>
         )}

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
-import { useGoogleLogin, GoogleLogin} from "@react-oauth/google"; // ✅ added
+import { useGoogleLogin, GoogleLogin } from "@react-oauth/google"; // ✅ added
 import "./login.css";
 import { loginUser, googleLogin } from "../../api/authApi";
 
@@ -60,7 +60,7 @@ export default function Login() {
       }
     } catch (err) {
       console.error(err);
-      showToast("Server error. Try again!", "error");
+      showToast("Login failed. Try again!", "error");
     } finally {
       setLoading(false);
     }
@@ -79,7 +79,7 @@ export default function Login() {
 
         showToast("Google login successful 🎉", "success");
 
-        setTimeout(() => navigate("/dashboard"), 1500);
+        setTimeout(() => navigate("/dashboard"), 1000);
       } else {
         showToast("Google login failed", "error");
       }
